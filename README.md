@@ -10,7 +10,7 @@
     - Chapter02.md 와 같이 업로드 (숫자는 두자리 수로)
     - README.md에 링크 연결
 4. Commit Messages
-    - md 파일 : [Add] 📝 Chapter.02 객체 생성과 파괴
+    - md 파일 : [Add] 📝 Chapter.01 디자인 패턴과 프로그래밍 패러다임
     - README : [Update] ✍️ REAEMD.md
 
 ## 👩‍💻 Schedule
