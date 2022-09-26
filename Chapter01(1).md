@@ -18,9 +18,7 @@
     - **모듈 간의 결합을 강하게** 만들 수 있음
 
 - **의존성 주입 (DI, Dependency Injection)**
-    - 모듈 간의 결합을 조금 더 느슨하게 만들어줌
-    
- ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/087d51d6-5db2-444e-89b4-0f848b1904bb/Untitled.png)
+    - 모듈 간의 결합을 조금 더 느슨하게 만들어
     
     - 메인 모듈이 직접 다른 하위 모듈에 대한 의존성을 주는 것이 아닌, 중간에 **의존성 주입자** (dependency injector)가 이 부분을 가로채 메인 모듈이 **간접적으로 의존성을 주입**하는 방식
     
