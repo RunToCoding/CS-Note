@@ -20,7 +20,7 @@
 - **의존성 주입 (DI, Dependency Injection)**
     - 모듈 간의 결합을 조금 더 느슨하게 만들어줌
     
-    ![Untitled](1%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB%20%E1%84%91%E1%85%A2%E1%84%90%E1%85%A5%E1%86%AB%E1%84%80%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%B5%E1%86%BC%20%E1%84%91%E1%85%A2%E1%84%85%E1%85%A5%E1%84%83%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%B7%2026cb3d46bf0543bfb291428e811714f2/Untitled.png)
+ ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/087d51d6-5db2-444e-89b4-0f848b1904bb/Untitled.png)
     
     - 메인 모듈이 직접 다른 하위 모듈에 대한 의존성을 주는 것이 아닌, 중간에 **의존성 주입자** (dependency injector)가 이 부분을 가로채 메인 모듈이 **간접적으로 의존성을 주입**하는 방식
     
