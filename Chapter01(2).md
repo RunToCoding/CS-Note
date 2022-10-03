@@ -184,3 +184,219 @@ MVVM 패턴은 MVC의 C에 해당하는 컨트롤러가 뷰모델(view model)로
     - 뷰는 반응형이 특징인 프런트엔드 프레임워크이며, watch와 computed 등으로 쉽게 반응형적인 값들을 구축할 수 있다.
     - 함수를 사용하지 않고 값 대입만으로도 변수가 변경되며 양방향 바인딩, html을 토대로 컴포넌트를 구축할 수 있다.
     - 재사용 가능한 컴포넌트 기반으로 UI를 구축할 수 있으며, BMW, 구글, 루이비통 등에서 사용한다.
+
+
+# SECTION 1.2 프로그래밍 패러다임
+
+# [1.2.1] 선언형과 함수형 프로그래밍
+
+> **선언형 프로그래밍(declarative Programming) :** ‘무엇’을 풀어내는가에 집중하는 패러다임, ‘프로그램은 함수로 이루어진 것이다’ 라는 명제가 담겨있는 패러다임
+> 
+
+> **함수형 프로그래밍(functional Programming)**: 선언형 패러다임의 일종, 작은 ‘**순수 함수**’들을 블록처럼 쌓아 로직을 구현하고 ‘**고차 함수**’를 통해 재사용성을 높인 프로그래밍 패러다임
+> 
+
+```jsx
+const ret = [1, 2, 3, 4, 5, 11, 12]
+.reduce((max, num) => num > max ? num : max, 0)
+console.log(ret) // 12
+```
+
+reduce () 는 “배열”만 받아서 누적한 결과값을 반환하는 ‘**순수 함수**’ 이다. → Javascript는 함수가 **일급 객체**이기 때문에 함수형 프로그래밍 방식이 선호된다.
+
+### 순수 함수
+
+- 출력이 입력에만 의존하는 함수
+
+```jsx
+const pure = (a, b) => {
+		return a + b
+}
+```
+
+- pure 함수는 들어오는 매개변수 a, b에만 영향을 받는다.
+- 만약 a, b 말고 다른 전역 변수 c가 출력에 영향을 주면 순수함수가 아니다.
+
+### 고차 함수
+
+- 함수가 함수를 값처럼 매개변수로 받아 로직을 생성할 수 있는 함수
+
+---
+
+**일급 객체 :** 고차 함수를 쓰기 위해서 해당 언어가 일급 객체여야함
+
+- 변수나 메서드에 함수를 할당할 수 있다.
+- 함수 안에 함수를 매개변수로 담을 수 있다.
+- 함수가 함수를 반환할 수 있다.
+
+```jsx
+const division = function (divisionValue) {
+  return function (value) {
+    return value / divisionValue;
+  };
+};
+```
+
+- division() 함수는 나누는 값(divisionValue)을 전달받아 추후에 나뉘는 값(value)을 전달받을 때 나누기를 할 수 있도록 함수를 반환한다.
+
+# [1.2.2] 객체지향 프로그래밍
+
+- **객체지향 프로그래밍(OOP, Object-Oriented Programming)**
+    - 데이터를 객체로 취급하여 객체 내부에 선언된 메서드를 활용하는 방식
+    - 설계에 많은 시간이 소요되고, 처리 속도가 다른 프로그래밍 패러다임에 비해 상대적으로 느림
+
+```jsx
+const ret = [1, 2, 3, 4, 5, 11, 12]
+class List {
+		constructor(list) {
+				this.list = list
+				this.mx = list.reduce((max, num) => num > max ? num : max, 0)
+		}
+		getMax() {
+				return this.mx
+		}
+}
+const a = new List(ret)
+console.log(a.getMax()) // 12
+```
+
+List라는 클래스를 만들고 a라는 객체를 만들 때 최댓값을 추출해내는 메서드를 만든 예제이다.
+
+### 객체지향 프로그래밍의 특징
+
+- **추상화(abstraction)**
+    - 복잡한 시스템으로부터 핵심적인 개념, 또는 기능을 간추려낸 것
+- **캡슐화(encapsulation)**
+    - 객체의 속성과 메서드를 하나로 묶고 일부를 외부에 감추어 은닉하는 것
+- **상속성(inheritance)**
+    - 상위 클래스의 특성을 하위 클래스가 이어받아서 재사용하거나 추가, 확장하는 것
+    - 코드의 재사용 측면, 계층적인 관계 생성, 유지 보수성에 중요
+- **다형성(polymorphism)**
+    - 하나의 메서드나 클래스가 다양한 방법으로 동작하는 것
+    - 오버로딩, 오버라이딩
+
+---
+
+### 오버로딩
+
+오버로딩은 같은 이름을 가진 메서드를 여러 개 두는 것을 말한다.
+
+- 메서드의 타입, 매개변수의 유형, 개수 등으로 여러 개를 둘 수 있으며 컴파일 중에 발생하는 **정적** 다형성이다.
+
+```java
+class Person {
+    public void eat(String a) {
+        System.out.println("I eat " + a);
+    }
+
+    public void eat(String a, String b) {
+        System.out.println("I eat " + a + " and " + b);
+    }
+}
+
+public class CalculateArea {
+    public static void main(String[] args) {
+        Person a = new Person();
+        a.eat("apple");
+        a.eat("tomato", "phodo");
+    }
+}
+
+/*
+ * I eat apple
+ * I eat tomato and phodo
+ */
+```
+
+매개변수에 따라 다른 함수가 호출된다.
+
+- 예를 들어 Java에서의 `println` 은 대표적인 오버로딩 메소드.
+    - println의 인자값으로 int, double, boolean, String등 다양한 타입의 매개변수를 집어넣어도 콘솔 창에 매개변수 타입에 맞춰 잘 출력되는 것을 볼 수 있다.
+
+### 오버라이딩
+
+- 오버라이딩은 주로 메서드 오버라이딩을 말한다.
+- 상위 클래스로부터 상속받은 매서드를 하위 클래스가 재정의하는 것
+- 런타임중에 발생하는 동적 다형성
+
+```java
+class Animal {
+    public void bark() {
+        System.out.println("mumu! mumu!");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void bark() {
+        System.out.println("wal!!! wal!!!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.bark();
+    }
+}
+
+/*
+ * wal!!! wal!!!
+ */
+```
+
+- 앞선 부모 클래스는 “mumu! mumu!”로 짖게 만들었지만 자식 클래스에서 “wal!!! wal!!!”로 짖게 만들었더니 자식 클래스 기반으로 메서드가 재정의 됨
+
+## 객체 지향 프로그래밍의 설계 원칙
+
+객체지향 프로그래밍을 설계할 때는 **SOLID 원칙**을 지켜주어야 한다.
+
+- **단일 책임 원칙(SRP, Single Responsibility Principle)**
+    - 모든 **클래스는 각각 하나의 책임**만 가져야 한다.
+- **개방-폐쇄 원칙(OCP, Open Closed Principle)**
+    - 유지 보수 사항이 생긴다면 **코드를 쉽게 확장**할 수 있도록 하고, 수정할 때는 닫혀 있어야한다.
+    - 즉, 기존의 코드는 잘 변경하지 않으면서도 확장은 쉽게 할 수 있어야 한다.
+- **리스코프 치환 원칙(LSP, Liskov Substitution Principle)**
+    - 프로그램의 객체는 프로그램의 **정확성을 깨뜨리지 않으면서 하위 타입의 인스턴스로 바꿀 수 있어**야 한다.
+- **인터페이스 분리 원칙(ISP, Interface Segregation Principle)**
+    - 하나의 인터페이스보다 **구체적인 여러 개의 인터페이스**를 만들어야 하는 원칙
+- **의존 역전 원칙(DIP, Dependency Inversion Principle)**
+    - 자신보다 변하기 쉬운 것에 의존하던 것을 추상화된 인터페이스나 상위 클래스를 두어 **변하기 쉬운 것의 변화에 영향받지 않게 하는 원칙**
+    - 즉, 상위 계층은 하위 계층에 변화에 대한 구현으로부터 독립해야한다.
+
+# [1.2.3] 절차형 프로그래밍
+
+- 로직이 수행되어야 할 연속적인 계산 과정으로 이루어짐
+- 순차척인 처리를 중요하게 여기고, 프로그램 전체가 유기적으로 연결되어 있음
+- 가독성이 좋으며 실행 속도가 빠름 → 계산이 많은 작업에 쓰임
+- 단점: 모듈화하기가 어렵고 유지 보수성이 떨어딤
+
+```jsx
+const ret = [1, 2, 3, 4, 5, 11, 12]
+let a = 0
+for (let i = 0; i < ret.length; i++) {
+		a = Math.max(ret[i], a)
+}
+console.log(a) // 12
+```
+
+자연수로 이루어진 배열에서 최댓값을 찾으라고 한다면 이와 같이 로직을 구성한다.
+
+# [1.2.4] 패러다임의 혼합
+
+비즈니스 로직이나 서비스의 특징을 고려해서 적절한 패러다임을 정하는 것이 좋다.
+
+- 명령형 프로그래밍
+    - 절차형 프로그래밍
+    - 객체 지향 프로그래밍
+- 선언형 프로그래밍
+    - 함수형 프로그래밍
+    
+
+---
+
+# 예상 질문
+
+1. 옵저버 패턴을 어떻게 구현하나요
+2. 프록시 서버를 설명하고 사용 사례에 대해 설명해주세요
+3. MVC 패턴을 설명하고 MVVM 패턴과의 차이는 무엇인지 설명해보세요
